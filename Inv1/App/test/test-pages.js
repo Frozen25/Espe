@@ -1,10 +1,14 @@
-var expect  = require('chai').expect;
-var request = require('request');
+var expect  = require('chai').expect;  ///Needed for Asserts
+var request = require('request');   // Needed for sending requests
 
-const assert = require('chai').assert;
+const assert = require('chai').assert;  /// library used for unit testing
 //const sayHello = require('../app').sayHello;
 const app = require('../app');
 
+
+//// Verifies each part of the site's webpage, and also its contents.
+
+// verifies status of webpage
 describe('Status and content', function() {
   describe ('Main page', function() {
     it('status', function(done){
@@ -13,7 +17,7 @@ describe('Status and content', function() {
         done();
       });
     });
-
+    /// verifies content of "helloworld" on the page
     it('content', function(done) {
       request('http://localhost:8080/' , function(error, response, body) {
         expect(body).to.equal('Hello World');
@@ -22,6 +26,7 @@ describe('Status and content', function() {
     });
   });
 
+  /// verifies the about page, since it has't been created yet, It returns error 404
   describe ('About page', function() {
     it('status', function(done){
       request('http://localhost:8080/about', function(error, response, body) {
@@ -34,8 +39,9 @@ describe('Status and content', function() {
   
 });
 
-
+// tests every function one by one
 describe('App',function(){
+  // tests the function result and its type
   describe('Say Hello Function',function(){
     it('app should return hello', function(){
       let result = app.sayHello();
